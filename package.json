@@ -1,20 +1,54 @@
 {
-  "name": "react-native-recyclerlistview",
-  "version": "1.4.1",
-  "description": "The listview that you need and deserve. It was built for performance, uses cell recycling to achieve smooth scrolling.",
-  "main": "dist/reactnative/index.js",
-  "types": "dist/reactnative/index.d.ts",
-  "scripts": {
-    "build": "sh scripts/build.sh",
-    "clean": "sh scripts/clean.sh",
-    "setup": "sh scripts/setup.sh",
-    "release": "sh scripts/publish-latest.sh",
-    "release-beta": "sh scripts/publish-beta.sh",
-    "release-local": "sh scripts/publish-local.sh"
+  "_from": "react-native-refresh-loadmore-recyclerlistview",
+  "_id": "react-native-refresh-loadmore-recyclerlistview@1.4.1",
+  "_inBundle": false,
+  "_integrity": "sha512-bpF1x3Ewc9fx26EKIjCfCB/ndO74cZ0Wb+MlxPKZsmtfAnjQw7ccVCXO5JYYOIwU/0bEj2RzoB5FMzLZ2xgdeQ==",
+  "_location": "/react-native-refresh-loadmore-recyclerlistview",
+  "_phantomChildren": {
+    "fbjs": "0.8.17"
   },
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "react-native-refresh-loadmore-recyclerlistview",
+    "name": "react-native-refresh-loadmore-recyclerlistview",
+    "escapedName": "react-native-refresh-loadmore-recyclerlistview",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-refresh-loadmore-recyclerlistview/-/react-native-refresh-loadmore-recyclerlistview-1.4.1.tgz",
+  "_shasum": "f9ff9d573036b313df9793bb60b1b676063f990e",
+  "_spec": "react-native-refresh-loadmore-recyclerlistview",
+  "_where": "/Users/heyanbei/Desktop/ZhiZhuo",
+  "author": {
+    "name": "bozaigao"
+  },
+  "bugs": {
+    "url": "https://github.com/bozaigao/react-native-refresh-loadmore-recyclerlistview/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "lodash.debounce": "4.0.8",
+    "prop-types": "15.5.8",
+    "ts-object-utils": "0.0.5"
+  },
+  "deprecated": false,
+  "description": "The listview that you need and deserve. It was built for performance, uses cell recycling to achieve smooth scrolling.",
+  "devDependencies": {
+    "@types/lodash.debounce": "4.0.3",
+    "@types/prop-types": "15.5.2",
+    "@types/react": "16.4.7",
+    "@types/react-native": "0.49.5"
+  },
+  "homepage": "https://github.com/bozaigao/react-native-refresh-loadmore-recyclerlistview",
   "keywords": [
     "react-native",
-    "react-native-recyclerlistview",
+    "react-native-refresh-loadmore-recyclerlistview",
     "recyclerview",
     "listview",
     "flatlist-alternative",
@@ -24,29 +58,25 @@
     "pulltorefresh",
     "loadmore"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bozaigao/react-native-recyclerlistview"
-  },
-  "author": "bozaigao",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bozaigao/react-native-recyclerlistview/issues"
-  },
-  "homepage": "https://github.com/bozaigao/react-native-recyclerlistview",
-  "dependencies": {
-    "lodash.debounce": "4.0.8",
-    "prop-types": "15.5.8",
-    "ts-object-utils": "0.0.5"
-  },
+  "main": "index.js",
+  "name": "react-native-refresh-loadmore-recyclerlistview",
   "peerDependencies": {
     "react": ">= 15.2.1",
     "react-native": ">= 0.30.0"
   },
-  "devDependencies": {
-    "@types/lodash.debounce": "4.0.3",
-    "@types/prop-types": "15.5.2",
-    "@types/react-native": "0.49.5",
-    "@types/react": "16.4.7"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bozaigao/react-native-refresh-loadmore-recyclerlistview.git"
+  },
+  "scripts": {
+    "build": "sh scripts/build.sh",
+    "clean": "sh scripts/clean.sh",
+    "release": "sh scripts/publish-latest.sh",
+    "release-beta": "sh scripts/publish-beta.sh",
+    "release-local": "sh scripts/publish-local.sh",
+    "setup": "sh scripts/setup.sh"
+  },
+  "types": "dist/reactnative/index.d.ts",
+  "version": "1.4.1"
 }

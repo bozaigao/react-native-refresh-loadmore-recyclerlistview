@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ActivityIndicatorIOS, Animated, AsyncStorage, Easing, Image, ImageBackground, Platform, ScrollView, StyleSheet, Text, View, } from 'react-native';
+import { ActivityIndicator, ActivityIndicatorIOS, Animated, AsyncStorage, Dimensions, Easing, Image, ImageBackground, Platform, ScrollView, StyleSheet, Text, View, } from 'react-native';
 import ScrollableMixin from './ScrollableMixin';
 import TSCast from "../../../utils/TSCast";
-import { color, commonStyles, height, width } from "../../../../../../Styles/Style";
 export var RefreshType;
 (function (RefreshType) {
     RefreshType["NORMAL"] = "normal";
@@ -215,7 +214,7 @@ export default class PullRefreshScrollView extends Component {
             }
         }
         else if (this.state.prLoading) {
-            jsxarr.push(<ActivityIndicator style={indicatorStyle} animated={true} color={commonStyles.colorTheme}/>);
+            jsxarr.push(<ActivityIndicator style={indicatorStyle} animated={true} color={'#488eff'}/>);
         }
         else {
             jsxarr.push(null);
@@ -259,7 +258,7 @@ export default class PullRefreshScrollView extends Component {
             width: 16,
             height: 16
         };
-        jsx.push(<Text key={2} style={[color(commonStyles.textGrayColor)]}>{this.state.loadTitle}</Text>);
+        jsx.push(<Text key={2} style={{ color: '#979aa0' }}>{this.state.loadTitle}</Text>);
         return (jsx);
     }
     rendeTextContent() {
@@ -326,7 +325,7 @@ export default class PullRefreshScrollView extends Component {
         return jsxarr;
     }
     renderIndicatorContent() {
-        if (height - this.props.contentHeight > 0 && Platform.OS === 'android') {
+        if (Dimensions.get('window').height - this.props.contentHeight > 0 && Platform.OS === 'android') {
             return null;
         }
         let type = this.props.refreshType;
@@ -340,7 +339,7 @@ export default class PullRefreshScrollView extends Component {
         if (type === RefreshType.IMAGE) {
             return;
         }
-        return (<View style={Platform.OS === 'ios' ? styles.pullRefresh : { width, height: this.loadMoreHeight }}>
+        return (<View style={Platform.OS === 'ios' ? styles.pullRefresh : { width: Dimensions.get('window').width, height: this.loadMoreHeight }}>
 
                 {jsx.map((item, index) => {
             return <View key={index}>{item}</View>;
@@ -351,7 +350,7 @@ export default class PullRefreshScrollView extends Component {
         if (!this.props.useLoadMore) {
             return null;
         }
-        if (height - this.props.contentHeight > 0) {
+        if (Dimensions.get('window').height - this.props.contentHeight > 0) {
             return null;
         }
         let jsx = [this.renderBottomContent()];
@@ -464,17 +463,17 @@ const styles = StyleSheet.create({
     text: {
         height: 70,
         backgroundColor: '#fafafa',
-        color: commonStyles.textGrayColor
+        color: '#979aa0'
     },
     prText: {
         marginBottom: 4,
-        color: commonStyles.textGrayColor,
+        color: '#979aa0',
         fontSize: 12,
     },
     prState: {
         marginBottom: 4,
         fontSize: 12,
-        color: commonStyles.textGrayColor,
+        color: '#979aa0',
     },
     lmState: {
         fontSize: 12,
