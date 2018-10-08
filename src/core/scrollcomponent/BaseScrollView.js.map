@@ -1,0 +1,1 @@
+{"version":3,"file":"BaseScrollView.js","sourceRoot":"","sources":["BaseScrollView.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAC;AAuB/B,MAAM,CAAC,OAAO,OAAgB,cAAe,SAAQ,KAAK,CAAC,SAAqC;IAC5F,YAAY,KAA6B;QACrC,KAAK,CAAC,KAAK,CAAC,CAAC;IACjB,CAAC;CAGJ"}

@@ -1,0 +1,52 @@
+{
+  "name": "react-native-recyclerlistview",
+  "version": "1.4.1",
+  "description": "The listview that you need and deserve. It was built for performance, uses cell recycling to achieve smooth scrolling.",
+  "main": "dist/reactnative/index.js",
+  "types": "dist/reactnative/index.d.ts",
+  "scripts": {
+    "build": "sh scripts/build.sh",
+    "clean": "sh scripts/clean.sh",
+    "setup": "sh scripts/setup.sh",
+    "release": "sh scripts/publish-latest.sh",
+    "release-beta": "sh scripts/publish-beta.sh",
+    "release-local": "sh scripts/publish-local.sh"
+  },
+  "keywords": [
+    "react-native",
+    "react-native-recyclerlistview",
+    "recyclerview",
+    "listview",
+    "flatlist-alternative",
+    "flatlist",
+    "60fps",
+    "performance",
+    "pulltorefresh",
+    "loadmore"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bozaigao/react-native-recyclerlistview"
+  },
+  "author": "bozaigao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bozaigao/react-native-recyclerlistview/issues"
+  },
+  "homepage": "https://github.com/bozaigao/react-native-recyclerlistview",
+  "dependencies": {
+    "lodash.debounce": "4.0.8",
+    "prop-types": "15.5.8",
+    "ts-object-utils": "0.0.5"
+  },
+  "peerDependencies": {
+    "react": ">= 15.2.1",
+    "react-native": ">= 0.30.0"
+  },
+  "devDependencies": {
+    "@types/lodash.debounce": "4.0.3",
+    "@types/prop-types": "15.5.2",
+    "@types/react-native": "0.49.5",
+    "@types/react": "16.4.7"
+  }
+}

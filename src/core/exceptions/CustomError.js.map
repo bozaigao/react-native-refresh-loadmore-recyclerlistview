@@ -1,0 +1,1 @@
+{"version":3,"file":"CustomError.js","sourceRoot":"","sources":["CustomError.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,OAAO,WAAY,SAAQ,KAAK;IAC1C,YAAY,SAAoB;QAC5B,KAAK,CAAC,SAAS,CAAC,OAAO,CAAC,CAAC;QACzB,IAAI,CAAC,IAAI,GAAG,SAAS,CAAC,IAAI,CAAC;IAC/B,CAAC;CACJ"}
