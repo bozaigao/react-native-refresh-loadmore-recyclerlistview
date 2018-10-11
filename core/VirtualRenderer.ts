@@ -4,6 +4,7 @@ import CustomError from "./exceptions/CustomError";
 import RecyclerListViewExceptions from "./exceptions/RecyclerListViewExceptions";
 import LayoutManager, { Point } from "./layoutmanager/LayoutManager";
 import ViewabilityTracker, { TOnItemStatusChanged } from "./ViewabilityTracker";
+//@ts-ignore
 import { ObjectUtil, Default } from "ts-object-utils";
 import TSCast from "../utils/TSCast";
 

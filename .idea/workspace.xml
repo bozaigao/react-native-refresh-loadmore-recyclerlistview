@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00ef5536-35e9-4cf3-bf6a-bedbcc14484b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/RecyclerListView.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/core/RecyclerListView.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/RecyclerListView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/core/RecyclerListView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/VirtualRenderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/core/VirtualRenderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js.map" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,8 +25,8 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1" column="58" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="58" />
+            <state relative-caret-position="223">
+              <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -34,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PullRefreshScrollView.tsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PullRefreshScrollView.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="143" column="43" lean-forward="true" selection-start-line="143" selection-start-column="43" selection-end-line="143" selection-end-column="43" />
+            <state relative-caret-position="511">
+              <caret line="504" selection-start-line="504" selection-end-line="504" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -46,11 +52,49 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="tsconfig.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tsconfig.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="BaseScrollComponent.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/scrollcomponent/BaseScrollComponent.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+            <state relative-caret-position="308">
+              <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RecyclerListView.tsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/RecyclerListView.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#1064#1116#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VirtualRenderer.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/VirtualRenderer.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#55#0" expanded="true" />
+                <element signature="e#440#494#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,7 +103,7 @@
         <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
-              <caret line="358" column="6" selection-start-line="358" selection-start-column="6" selection-end-line="358" selection-end-column="6" />
+              <caret line="363" column="6" selection-start-line="363" selection-start-column="6" selection-end-line="363" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -76,6 +120,7 @@
       <find>static</find>
       <find>propTypes</find>
       <find>RecyclerListView</find>
+      <find>ts-object-utils</find>
     </findStrings>
     <replaceStrings>
       <replace>react-native-refresh-loadmore-recyclerlistview</replace>
@@ -87,10 +132,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js" />
         <option value="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/core/RecyclerListView.tsx" />
+        <option value="$PROJECT_DIR$/core/VirtualRenderer.ts" />
       </list>
     </option>
   </component>
@@ -138,19 +185,6 @@
               <item name="react-native-refresh-loadmore-recyclerlistview" type="462c0819:PsiDirectoryNode" />
               <item name="platform" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="react-native-refresh-loadmore-recyclerlistview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-native-refresh-loadmore-recyclerlistview" type="462c0819:PsiDirectoryNode" />
-              <item name="platform" type="462c0819:PsiDirectoryNode" />
-              <item name="reactnative" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-native-refresh-loadmore-recyclerlistview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-native-refresh-loadmore-recyclerlistview" type="462c0819:PsiDirectoryNode" />
-              <item name="platform" type="462c0819:PsiDirectoryNode" />
-              <item name="reactnative" type="462c0819:PsiDirectoryNode" />
-              <item name="scrollcomponent" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -195,27 +229,28 @@
       <workItem from="1538958178307" duration="947000" />
       <workItem from="1538970023824" duration="1908000" />
       <workItem from="1539082624122" duration="492000" />
-      <workItem from="1539238630136" duration="2416000" />
+      <workItem from="1539238630136" duration="2839000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6010000" />
+    <option name="totallyTimeSpent" value="6433000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1680" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TypeScript" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21274355" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="npm" order="2" side_tool="true" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.2875622" />
+      <window_info anchor="bottom" id="TypeScript" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21274355" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -224,7 +259,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,6 +272,11 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/package.json">
@@ -291,20 +330,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx" />
-    <entry file="file://$PROJECT_DIR$/tsconfig.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="58" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -315,26 +340,65 @@
     <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
-          <caret line="358" column="6" selection-start-line="358" selection-start-column="6" selection-end-line="358" selection-end-column="6" />
+          <caret line="363" column="6" selection-start-line="363" selection-start-column="6" selection-end-line="363" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/ScrollableMixin.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/scrollcomponent/BaseScrollComponent.tsx">
+    <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+        <state relative-caret-position="511">
+          <caret line="504" selection-start-line="504" selection-end-line="504" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx">
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="143" column="43" lean-forward="true" selection-start-line="143" selection-start-column="43" selection-end-line="143" selection-end-column="43" />
+        <state relative-caret-position="308">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/scrollcomponent/BaseScrollComponent.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/RecyclerListView.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1064#1116#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/VirtualRenderer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+            <element signature="e#440#494#0" expanded="true" />
           </folding>
         </state>
       </provider>
