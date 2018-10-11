@@ -1,29 +1,29 @@
 {
-  "_from": "react-native-refresh-loadmore-recyclerlistview@^1.4.3",
-  "_id": "react-native-refresh-loadmore-recyclerlistview@1.4.4",
+  "_from": "react-native-refresh-loadmore-recyclerlistview@^1.4.9",
+  "_id": "react-native-refresh-loadmore-recyclerlistview@1.4.9",
   "_inBundle": false,
-  "_integrity": "sha512-AW5VxYSnJslHHCZ/4Lu1p0duyjeabqiWQ50MraUI+BY16Ol40wGIYFfM4iZFusyvDXICbIbUDMChCi/NW7/XRA==",
+  "_integrity": "sha512-i3Pl61XkN7FyWZEdYsgOb4kyu5FPF1Fuep7jIjAI/oe4CXdl1e+LFgzeZy8YFYtMlAD0D1AFjRNs0IrWqcqU4Q==",
   "_location": "/react-native-refresh-loadmore-recyclerlistview",
   "_phantomChildren": {
+    "csstype": "2.5.7",
     "fbjs": "0.8.17"
   },
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "react-native-refresh-loadmore-recyclerlistview@^1.4.3",
+    "raw": "react-native-refresh-loadmore-recyclerlistview@^1.4.9",
     "name": "react-native-refresh-loadmore-recyclerlistview",
     "escapedName": "react-native-refresh-loadmore-recyclerlistview",
-    "rawSpec": "^1.4.3",
+    "rawSpec": "^1.4.9",
     "saveSpec": null,
-    "fetchSpec": "^1.4.3"
+    "fetchSpec": "^1.4.9"
   },
   "_requiredBy": [
-    "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/react-native-refresh-loadmore-recyclerlistview/-/react-native-refresh-loadmore-recyclerlistview-1.4.4.tgz",
-  "_shasum": "18b5b5a1a83c8b74d39c3b4013a708187803bdf8",
-  "_spec": "react-native-refresh-loadmore-recyclerlistview@^1.4.3",
+  "_resolved": "https://registry.npmjs.org/react-native-refresh-loadmore-recyclerlistview/-/react-native-refresh-loadmore-recyclerlistview-1.4.9.tgz",
+  "_shasum": "d2fc6f11343ff9418603c997eadbef335d15ca48",
+  "_spec": "react-native-refresh-loadmore-recyclerlistview@^1.4.9",
   "_where": "/Users/heyanbei/Desktop/ZhiZhuo/ZhiZhuo",
   "author": {
     "name": "bozaigao"
@@ -33,13 +33,13 @@
   },
   "bundleDependencies": false,
   "dependencies": {
-    "lodash.debounce": "4.0.8",
-    "prop-types": "15.5.8",
-    "ts-object-utils": "0.0.5",
     "@types/lodash.debounce": "4.0.3",
     "@types/prop-types": "15.5.2",
     "@types/react": "16.4.7",
-    "@types/react-native": "0.49.5"
+    "@types/react-native": "0.49.5",
+    "lodash.debounce": "4.0.8",
+    "prop-types": "15.5.8",
+    "ts-object-utils": "0.0.5"
   },
   "deprecated": false,
   "description": "The listview that you need and deserve. It was built for performance, uses cell recycling to achieve smooth scrolling.",

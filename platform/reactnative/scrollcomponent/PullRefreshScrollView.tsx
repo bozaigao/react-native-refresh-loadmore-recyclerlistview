@@ -32,7 +32,6 @@ import {Easing} from "react-native";
  */
 
 export default class PullRefreshScrollView extends BaseScrollComponent {
-
     private _height: number;
     private _width: number;
     private _isSizeChangedCalledOnce: boolean;

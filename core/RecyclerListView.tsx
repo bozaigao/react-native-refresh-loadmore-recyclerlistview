@@ -36,13 +36,15 @@ import BaseScrollView, {ScrollEvent, ScrollViewDefaultProps} from "./scrollcompo
 import {TOnItemStatusChanged} from "./ViewabilityTracker";
 import VirtualRenderer, {RenderStack, RenderStackItem, RenderStackParams} from "./VirtualRenderer";
 import ItemAnimator, {BaseItemAnimator} from "./ItemAnimator";
+import {ScrollView} from 'react-native';
 
 //#if [REACT-NATIVE]
 import ViewRenderer from "../platform/reactnative/viewrenderer/ViewRenderer";
 import {DefaultJSItemAnimator as DefaultItemAnimator} from "../platform/reactnative/itemanimators/defaultjsanimator/DefaultJSItemAnimator";
 import {Platform} from "react-native";
 import PullRefreshScrollView from "../platform/reactnative/scrollcomponent/PullRefreshScrollView";
-import {Dimensions,View,Text,StyleSheet} from "react-native";
+import {Dimensions, View, Text, StyleSheet} from "react-native";
+import TSCast from "react-native-refresh-loadmore-recyclerlistview/utils/TSCast";
 
 const IS_WEB = Platform.OS === "web",
 //#endif
@@ -178,7 +180,9 @@ export default class RecyclerListView extends React.Component<RecyclerListViewPr
             isHorizontal: false,
             contentHeight: 0,
             contentWidth: 0,
-            onLoadMore: props.onEndReached
+            onLoadMore: props.onEndReached,
+            externalScrollView: TSCast.cast(ScrollView), //TSI
+            scrollThrottle: 16,
         };
         this._onScroll = this._onScroll.bind(this);
         this._onSizeChanged = this._onSizeChanged.bind(this);
@@ -350,7 +354,7 @@ export default class RecyclerListView extends React.Component<RecyclerListViewPr
             height: 16
         };
 
-        jsx.push(<Text key={2} style={{color:'#979aa0'}}>{'加载跟多'}</Text>);
+        jsx.push(<Text key={2} style={{color: '#979aa0'}}>{'加载跟多'}</Text>);
 
         return (jsx);
     }

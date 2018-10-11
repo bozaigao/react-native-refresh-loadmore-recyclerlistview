@@ -11,11 +11,13 @@ import LayoutManager from "./layoutmanager/LayoutManager";
 import Messages from "./messages/Messages";
 import VirtualRenderer from "./VirtualRenderer";
 import { BaseItemAnimator } from "./ItemAnimator";
+import { ScrollView } from 'react-native';
 import ViewRenderer from "../platform/reactnative/viewrenderer/ViewRenderer";
 import { DefaultJSItemAnimator as DefaultItemAnimator } from "../platform/reactnative/itemanimators/defaultjsanimator/DefaultJSItemAnimator";
 import { Platform } from "react-native";
 import PullRefreshScrollView from "../platform/reactnative/scrollcomponent/PullRefreshScrollView";
 import { View, Text, StyleSheet } from "react-native";
+import TSCast from "react-native-refresh-loadmore-recyclerlistview/utils/TSCast";
 const IS_WEB = Platform.OS === "web", refreshRequestDebouncer = debounce((executable) => {
     executable();
 });
@@ -64,7 +66,9 @@ export default class RecyclerListView extends React.Component {
             isHorizontal: false,
             contentHeight: 0,
             contentWidth: 0,
-            onLoadMore: props.onEndReached
+            onLoadMore: props.onEndReached,
+            externalScrollView: TSCast.cast(ScrollView),
+            scrollThrottle: 16,
         };
         this._onScroll = this._onScroll.bind(this);
         this._onSizeChanged = this._onSizeChanged.bind(this);
