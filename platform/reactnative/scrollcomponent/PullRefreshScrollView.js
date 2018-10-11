@@ -93,7 +93,6 @@ export default class PullRefreshScrollView extends Component {
             this.scrollView.scrollTo({ x: 0, y: this.loadMoreHeight, animated: true });
         }
         if (this.state.prState) {
-            console.log('收起1');
             this.scrollView.scrollTo({ x: 0, y: -70, animated: true });
             this.setState({
                 prTitle: this.refreshingText,
@@ -123,7 +122,6 @@ export default class PullRefreshScrollView extends Component {
         let y = target.contentOffset.y;
         if (contentSize.height - layoutMeasurement.height - y < 40) {
             if (this.props.onLoadMore && this.lastContentHeight !== contentSize.height) {
-                console.log('加载更多');
                 this.lastContentHeight = contentSize.height;
                 this.props.onLoadMore(this);
             }
@@ -139,7 +137,6 @@ export default class PullRefreshScrollView extends Component {
         });
         AsyncStorage.setItem(this.prStoryKey, now.toString());
         if (Platform.OS === 'ios') {
-            console.log('收起2');
             this.scrollView.scrollTo({ x: 0, y: 0, animated: true });
         }
         else if (Platform.OS === 'android') {
@@ -378,7 +375,6 @@ export default class PullRefreshScrollView extends Component {
         return stickyHeaderIndices;
     }
     render() {
-        console.log('g高度', this.props.contentHeight);
         return (<ScrollView ref={(scrollView) => {
             this.scrollView = scrollView;
         }} {...this.props} bounces={true} onMomentumScrollEnd={(e) => {

@@ -128,34 +128,34 @@ export default class PullRefreshScrollView extends Component<Props, State> {
 
     // 滚动触发
     onScroll(e) {
-            let target = e.nativeEvent;
-            let y = target.contentOffset.y;
+        let target = e.nativeEvent;
+        let y = target.contentOffset.y;
 
 
-            if (this.dragFlag) {
-                if (Platform.OS === 'ios') {
-                    if (y <= -70) {
-                        this.upState();
+        if (this.dragFlag) {
+            if (Platform.OS === 'ios') {
+                if (y <= -70) {
+                    this.upState();
 
-                    } else {
-                        this.downState();
-                    }
-                } else if (Platform.OS === 'android') {
-                    if (y <= 10) {
-                        this.upState();
+                } else {
+                    this.downState();
+                }
+            } else if (Platform.OS === 'android') {
+                if (y <= 10) {
+                    this.upState();
 
-                    } else {
-                        this.downState();
-                    }
+                } else {
+                    this.downState();
                 }
             }
+        }
 
-            this.onCheckEndReached(target);
+        this.onCheckEndReached(target);
 
 
-            if (this.props.onScroll) {
-                this.props.onScroll(e);
-            }
+        if (this.props.onScroll) {
+            this.props.onScroll(e);
+        }
     }
 
     // 高于临界值状态
@@ -187,44 +187,43 @@ export default class PullRefreshScrollView extends Component<Props, State> {
 
     // 手指离开
     onScrollEndDrag(e) {
-            let target = e.nativeEvent;
-            let y = target.contentOffset.y;
+        let target = e.nativeEvent;
+        let y = target.contentOffset.y;
 
-            this.dragFlag = false;
-            if (y <= this.loadMoreHeight && y >= 10 && Platform.OS === 'android') {
-                this.scrollView.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
+        this.dragFlag = false;
+        if (y <= this.loadMoreHeight && y >= 10 && Platform.OS === 'android') {
+            this.scrollView.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
+        }
+        if (this.state.prState) {
+
+            // 回到待收起状态
+            this.scrollView.scrollTo({x: 0, y: -70, animated: true});
+
+
+            this.setState({
+                prTitle: this.refreshingText,
+                prLoading: true,
+                prArrowDeg: new Animated.Value(0),
+
+            });
+
+            // 触发外部的下拉刷新方法
+            if (this.props.onRefresh) {
+                this.props.onRefresh(this);
             }
-            if (this.state.prState) {
-
-                console.log('收起1');
-                // 回到待收起状态
-                this.scrollView.scrollTo({x: 0, y: -70, animated: true});
-
-
-                this.setState({
-                    prTitle: this.refreshingText,
-                    prLoading: true,
-                    prArrowDeg: new Animated.Value(0),
-
-                });
-
-                // 触发外部的下拉刷新方法
-                if (this.props.onRefresh) {
-                    this.props.onRefresh(this);
-                }
-            }
+        }
     }
 
     // 手指未离开
     onScrollBeginDrag() {
-            this.setState({
-                beginScroll: true
-            });
-            this.dragFlag = true;
+        this.setState({
+            beginScroll: true
+        });
+        this.dragFlag = true;
 
-            if (this.props.onScrollBeginDrag) {
-                this.props.onScrollBeginDrag();
-            }
+        if (this.props.onScrollBeginDrag) {
+            this.props.onScrollBeginDrag();
+        }
     }
 
     onCheckEndReached(target) {
@@ -239,7 +238,6 @@ export default class PullRefreshScrollView extends Component<Props, State> {
 
             // 触发外部的滚动加载方法
             if (this.props.onLoadMore && this.lastContentHeight !== contentSize.height) {
-                console.log('加载更多');
                 this.lastContentHeight = contentSize.height;
                 this.props.onLoadMore(this);
             }
@@ -268,7 +266,6 @@ export default class PullRefreshScrollView extends Component<Props, State> {
         // 存一下刷新时间
         AsyncStorage.setItem(this.prStoryKey, now.toString());
         if (Platform.OS === 'ios') {
-            console.log('收起2');
             this.scrollView.scrollTo({x: 0, y: 0, animated: true});
         } else if (Platform.OS === 'android') {
             this.scrollView.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
@@ -567,7 +564,6 @@ export default class PullRefreshScrollView extends Component<Props, State> {
 
 
     render() {
-        console.log('g高度',this.props.contentHeight)
 
         return (<ScrollView
             ref={(scrollView) => {
