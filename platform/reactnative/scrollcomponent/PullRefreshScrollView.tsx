@@ -131,7 +131,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                           }
 
                       }}
-                      bounces={true}
+                      bounces={this.props.onRefresh ? true : false}
                       onScrollEndDrag={(e) => this.onScrollEndDrag(e)}
                       onScrollBeginDrag={() => this.onScrollBeginDrag()}
                       removeClippedSubviews={false}

@@ -70,7 +70,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                     }
                 }
             }
-        }} bounces={true} onScrollEndDrag={(e) => this.onScrollEndDrag(e)} onScrollBeginDrag={() => this.onScrollBeginDrag()} removeClippedSubviews={false} scrollEventThrottle={16} {...this.props} horizontal={this.props.isHorizontal} onScroll={this._onScroll} onLayout={(!this._isSizeChangedCalledOnce || this.props.canChangeSize) ? this._onLayout : this._dummyOnLayout}>
+        }} bounces={this.props.onRefresh ? true : false} onScrollEndDrag={(e) => this.onScrollEndDrag(e)} onScrollBeginDrag={() => this.onScrollBeginDrag()} removeClippedSubviews={false} scrollEventThrottle={16} {...this.props} horizontal={this.props.isHorizontal} onScroll={this._onScroll} onLayout={(!this._isSizeChangedCalledOnce || this.props.canChangeSize) ? this._onLayout : this._dummyOnLayout}>
                 <View style={{ flexDirection: this.props.isHorizontal ? "row" : "column" }}>
                     {this.props.onRefresh ?
             this.renderIndicatorContent() :
