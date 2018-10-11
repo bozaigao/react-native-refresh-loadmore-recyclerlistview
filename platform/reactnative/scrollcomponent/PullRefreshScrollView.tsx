@@ -1,217 +1,157 @@
 /**
- * @filename PullRefreshScrollView.tsx
+ * @filename ScrollComponent.tsx
  * @author 何晏波
  * @QQ 1054539528
- * @date 2018/9/29
- * @Description: 封装下拉刷新上拉加载
- */
-import React, {Component} from 'react';
+ * @date 2018/10/11
+ * @Description: 截至目前为止我所见过的和使用过的最流畅的rn同时完美适配Android和iOS的下拉刷新上拉加载组件
+ * 结合recyclerlistview的高性能内存回收利用机制简直是绝配
+*/
+import * as React from "react";
 import {
-    ActivityIndicator,
-    ActivityIndicatorIOS,
-    Animated,
-    AsyncStorage,
-    Dimensions,
-    Easing,
-    Image, ImageBackground,
     LayoutChangeEvent,
-    Platform,
+    NativeScrollEvent,
+    NativeSyntheticEvent,
     ScrollView,
-    StyleSheet,
-    Text,
     View,
-    ViewStyle,
-} from 'react-native';
-import ScrollableMixin from './ScrollableMixin';
+    Platform,
+    ActivityIndicator,
+    AsyncStorage
+} from "react-native";
+import BaseScrollComponent, {ScrollComponentProps} from "../../../core/scrollcomponent/BaseScrollComponent";
 import TSCast from "../../../utils/TSCast";
+import {Dimensions,Text,StyleSheet} from "react-native";
+import RecyclerListView from "react-native-refresh-loadmore-recyclerlistview/core/RecyclerListView";
+import * as PropTypes from "prop-types";
+import {Animated} from "react-native";
+import {Easing} from "react-native";
 
-export enum RefreshType {
-    NORMAL = 'normal',
-    TEXT = 'text',
-    IMAGE = 'image',
-}
+/***
+ * The responsibility of a scroll component is to report its size, scroll events and provide a way to scroll to a given offset.
+ * FindRecyclerListView works on top of this interface and doesn't care about the implementation. To support web we only had to provide
+ * another component written on top of web elements
+ */
 
-interface Props {
-    refreshedText?: string;
-    refreshingText?: string;
-    refreshText?: string;
-    endText?: string;
-    noDataText?: string;
-    endingText?: string;
-    indicatorArrowImg?: {
-        style: ViewStyle | ViewStyle[];
-        url: string;
-    },
-    indicatorImg?: {
-        style: any;
-        url: string;
-    },
-    refreshType?: RefreshType;
-    onRefresh?: any;
-    useLoadMore?: boolean;
-    onScroll?: any;
-    onScrollBeginDrag?: any;
-    onLoadMore?: any;
-    arrowStyle?: any;
-    stickyHeaderIndices?: any;
-    onSizeChanged: any;
-    canChangeSize?: boolean;
-    isHorizontal?: boolean;
-    contentHeight: number,
-    contentWidth: number,
-    flag?: string,
-}
+export default class PullRefreshScrollView extends BaseScrollComponent {
+    public static defaultProps = {
+        contentHeight: 0,
+        contentWidth: 0,
+        externalScrollView: TSCast.cast(ScrollView), //TSI
+        isHorizontal: false,
+        scrollThrottle: 16,
+    };
 
-interface State {
-    prTitle: string;
-    loadTitle: string;
-    prState: number;
-    prArrowDeg: any;
-    prTimeDisplay: string;
-    prLoading: boolean;
-    lmState: number;
-    beginScroll: boolean;
-}
-
-export default class PullRefreshScrollView extends Component<Props, State> {
-    private refreshedText;
-    private refreshingText;
-    private refreshText;
-    private endText;
-    private endingText;
-    private useLoadMore;
-    private base64Icon;
-    private dragFlag;
-    private prStoryKey;
-    private scrollView;
-    private lastContentHeight;
-    private transform;
     private _height: number;
     private _width: number;
     private _isSizeChangedCalledOnce: boolean;
-    private timer: any;
-    private flag;
+    private _dummyOnLayout: (event: LayoutChangeEvent) => void = TSCast.cast(null);
+    private _scrollViewRef: ScrollView | null = null;
+    public static propTypes = {};
+    private transform;
+    private base64Icon;
     private loadMoreHeight: number;
+    private dragFlag;
+    private prStoryKey;
+    private flag;
+    private timer: any;
 
-    constructor(props) {
-        super(props);
+    constructor(args: ScrollComponentProps) {
+        super(args);
+        this.state = {
+            prTitle: args.refreshText,
+            loadTitle: args.endingText,
+            prLoading:false,
+            prArrowDeg:new Animated.Value(0),
+            prTimeDisplay: '暂无更新',
+            beginScroll: null,
+            prState: 0,
+        };
+        this.loadMoreHeight = 60;
+        this.dragFlag = false; //scrollview是否处于拖动状态的标志
+        this.base64Icon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAABQBAMAAAD8TNiNAAAAJ1BMVEUAAACqqqplZWVnZ2doaGhqampoaGhpaWlnZ2dmZmZlZWVmZmZnZ2duD78kAAAADHRSTlMAA6CYqZOlnI+Kg/B86E+1AAAAhklEQVQ4y+2LvQ3CQAxGLSHEBSg8AAX0jECTnhFosgcjZKr8StE3VHz5EkeRMkF0rzk/P58k9rgOW78j+TE99OoeKpEbCvcPVDJ0OvsJ9bQs6Jxs26h5HCrlr9w8vi8zHphfmI0fcvO/ZXJG8wDzcvDFO2Y/AJj9ADE7gXmlxFMIyVpJ7DECzC9J2EC2ECAAAAAASUVORK5CYII=';
+        this._onScroll = this._onScroll.bind(this);
         this._onLayout = this._onLayout.bind(this);
-        // = this.scrollView;
-        this.refreshedText = props.refreshedText;
-        this.refreshingText = props.refreshingText;
-        this.refreshText = props.refreshText;
-        this.endText = props.endText;
-        this.endingText = props.endingText;
-        this.useLoadMore = props.useLoadMore;
+
         this._height = 0;
         this._width = 0;
-        this._isSizeChangedCalledOnce = false;
-        this.loadMoreHeight = 60;
-        this.state = {
-            prTitle: this.refreshText,
-            loadTitle: this.endingText,
-            prState: 0,
-            prTimeDisplay: '暂无更新',
-            prLoading: false,
-            prArrowDeg: new Animated.Value(0),
-            lmState: 0,
-            beginScroll: null,
-        };
-
-
-        this.base64Icon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAABQBAMAAAD8TNiNAAAAJ1BMVEUAAACqqqplZWVnZ2doaGhqampoaGhpaWlnZ2dmZmZlZWVmZmZnZ2duD78kAAAADHRSTlMAA6CYqZOlnI+Kg/B86E+1AAAAhklEQVQ4y+2LvQ3CQAxGLSHEBSg8AAX0jECTnhFosgcjZKr8StE3VHz5EkeRMkF0rzk/P58k9rgOW78j+TE99OoeKpEbCvcPVDJ0OvsJ9bQs6Jxs26h5HCrlr9w8vi8zHphfmI0fcvO/ZXJG8wDzcvDFO2Y/AJj9ADE7gXmlxFMIyVpJ7DECzC9J2EC2ECAAAAAASUVORK5CYII=';
-        this.dragFlag = false; //scrollview是否处于拖动状态的标志
         this.prStoryKey = 'prtimekey';
-
-
+        this._isSizeChangedCalledOnce = false;
     }
 
-    // 滚动触发
-    onScroll(e) {
-        let target = e.nativeEvent;
-        let y = target.contentOffset.y;
+    public scrollTo(x: number, y: number, isAnimated: boolean): void {
+        if (this._scrollViewRef) {
+            this._scrollViewRef.scrollTo({x, y, animated: isAnimated});
+        }
+    }
 
+    componentWillReceiveProps() {
+        if (this.flag !== this.props.flag) {
+            if (Platform.OS === 'android') {
+                this.setState({
+                    prTitle: this.props.refreshingText,
+                    prLoading: true,
+                    prArrowDeg: new Animated.Value(0),
 
-        if (this.dragFlag) {
-            if (Platform.OS === 'ios') {
-                if (y <= -70) {
-                    this.upState();
-
-                } else {
-                    this.downState();
-                }
-            } else if (Platform.OS === 'android') {
-                if (y <= 10) {
-                    this.upState();
-
-                } else {
-                    this.downState();
-                }
+                });
+                this.timer = setTimeout(() => {
+                    this._scrollViewRef.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
+                    this.timer && clearTimeout(this.timer);
+                }, 1000);
             }
+            this.flag = this.props.flag;
         }
 
-        this.onCheckEndReached(target);
-
-
-        if (this.props.onScroll) {
-            this.props.onScroll(e);
-        }
     }
 
-    // 高于临界值状态
-    upState() {
-        this.setState({
-            prTitle: this.refreshedText,
-            prState: 1
-        });
+    public render(): JSX.Element {
+        const Scroller: any = TSCast.cast<ScrollView>(this.props.externalScrollView); //TSI
 
-        Animated.timing(this.state.prArrowDeg, {
-            toValue: 1,
-            duration: 100,
-            easing: Easing.inOut(Easing.quad)
-        }).start();
-    }
+        return (
+            <Scroller ref={(scrollView: any) => {
+                this._scrollViewRef = scrollView as (ScrollView | null);
+                return this._scrollViewRef;
+            }}
+                      onMomentumScrollEnd={(e) => {
+                          if (Platform.OS === 'android') {
+                              let target = e.nativeEvent;
+                              let y = target.contentOffset.y;
 
-    // 低于临界值状态
-    downState() {
-        this.setState({
-            prTitle: this.refreshText,
-            prState: 0
-        });
-        Animated.timing(this.state.prArrowDeg, {
-            toValue: 0,
-            duration: 100,
-            easing: Easing.inOut(Easing.quad)
-        }).start();
-    }
+                              if (y >= 0 && y <= this.loadMoreHeight) {
+                                  this.setState({
+                                      prTitle: this.props.refreshingText,
+                                      prLoading: true,
+                                      prArrowDeg: new Animated.Value(0),
 
-    // 手指离开
-    onScrollEndDrag(e) {
-        let target = e.nativeEvent;
-        let y = target.contentOffset.y;
+                                  });
 
-        this.dragFlag = false;
-        if (y <= this.loadMoreHeight && y >= 10 && Platform.OS === 'android') {
-            this.scrollView.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
-        }
-        if (this.state.prState) {
+                                  // 触发外部的下拉刷新方法
+                                  if (this.props.onRefresh) {
+                                      this.props.onRefresh(this);
+                                  }
+                              }
+                          }
 
-            // 回到待收起状态
-            this.scrollView.scrollTo({x: 0, y: -70, animated: true});
-
-
-            this.setState({
-                prTitle: this.refreshingText,
-                prLoading: true,
-                prArrowDeg: new Animated.Value(0),
-
-            });
-
-            // 触发外部的下拉刷新方法
-            if (this.props.onRefresh) {
-                this.props.onRefresh(this);
-            }
-        }
+                      }}
+                      bounces={true}
+                      onScrollEndDrag={(e) => this.onScrollEndDrag(e)}
+                      onScrollBeginDrag={() => this.onScrollBeginDrag()}
+                      removeClippedSubviews={false}
+                      scrollEventThrottle={16}
+                      {...this.props}
+                      horizontal={this.props.isHorizontal}
+                      onScroll={this._onScroll}
+                      onLayout={(!this._isSizeChangedCalledOnce || this.props.canChangeSize) ? this._onLayout : this._dummyOnLayout}>
+                <View style={{flexDirection: this.props.isHorizontal ? "row" : "column"}}>
+                    {this.renderIndicatorContent()}
+                    <View style={{
+                        height: this.props.contentHeight,
+                        width: this.props.contentWidth,
+                    }}>
+                        {this.props.children}
+                    </View>
+                    {this.props.onEndReached ? this.renderIndicatorContentBottom() : null}
+                </View>
+            </Scroller>
+        );
     }
 
     // 手指未离开
@@ -226,112 +166,51 @@ export default class PullRefreshScrollView extends Component<Props, State> {
         }
     }
 
-    onCheckEndReached(target) {
-        if (!this.useLoadMore || this.state.lmState) {
-            return;
-        }
-        let contentSize = target.contentSize;
-        let layoutMeasurement = target.layoutMeasurement;
+    // 手指离开
+    onScrollEndDrag(e) {
+        let target = e.nativeEvent;
         let y = target.contentOffset.y;
 
-        if (contentSize.height - layoutMeasurement.height - y < 40) {
-
-            // 触发外部的滚动加载方法
-            if (this.props.onLoadMore && this.lastContentHeight !== contentSize.height) {
-                this.lastContentHeight = contentSize.height;
-                this.props.onLoadMore(this);
-            }
-
+        this.dragFlag = false;
+        if (y <= this.loadMoreHeight && y >= 10 && Platform.OS === 'android') {
+            this._scrollViewRef.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
         }
+        if (this.state.prState) {
 
-    }
+            // 回到待收起状态
+            this._scrollViewRef.scrollTo({x: 0, y: -70, animated: true});
 
 
-    /**
-     * @author 何晏波
-     * @QQ 1054539528
-     * @date 2018/9/29
-     * @function: 刷新结束
-     */
-    onRefreshEnd() {
-        let now = new Date().getTime();
+            this.setState({
+                prTitle: this.props.refreshingText,
+                prLoading: true,
+                prArrowDeg: new Animated.Value(0),
 
-        this.setState({
-            prTitle: this.refreshText,
-            prLoading: false,
-            beginScroll: false,
-            prTimeDisplay: dateFormat(now, 'yyyy-MM-dd hh:mm')
-        });
+            });
 
-        // 存一下刷新时间
-        AsyncStorage.setItem(this.prStoryKey, now.toString());
-        if (Platform.OS === 'ios') {
-            this.scrollView.scrollTo({x: 0, y: 0, animated: true});
-        } else if (Platform.OS === 'android') {
-            this.scrollView.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
+            // 触发外部的下拉刷新方法
+            if (this.props.onRefresh) {
+                this.props.onRefresh(this);
+            }
         }
     }
 
-
-    /**
-     * @author 何晏波
-     * @QQ 1054539528
-     * @date 2018/9/29
-     * @function: 数据加载完成
-     */
-    onLoadFinish() {
-        this.setState({loadTitle: this.props.endText});
-    }
-
-
-    /**
-     * @author 何晏波
-     * @QQ 1054539528
-     * @date 2018/9/29
-     * @function: 没有数据可加载
-     */
-    onNoDataToLoad() {
-        this.setState({loadTitle: this.props.noDataText});
-    }
-
-    componentDidMount() {
-        AsyncStorage.getItem(this.prStoryKey, (error, result: any) => {
-
-
-            if (result) {
-                let tmp = result;
-
-                tmp = parseInt(tmp, 10);
-
-                //将时间传入下拉刷新的state
-                this.setState({
-                    prTimeDisplay: dateFormat(new Date(tmp), 'yyyy-MM-dd hh:mm'),
-                });
-
-            }
-
-
-        });
-    }
-
-
-    componentWillReceiveProps() {
-        if (this.flag !== this.props.flag) {
-            if (Platform.OS === 'android') {
-                this.setState({
-                    prTitle: this.refreshingText,
-                    prLoading: true,
-                    prArrowDeg: new Animated.Value(0),
-
-                });
-                this.timer = setTimeout(() => {
-                    this.scrollView.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
-                    this.timer && clearTimeout(this.timer);
-                }, 1000);
-            }
-            this.flag = this.props.flag;
+    renderIndicatorContent() {
+        if (Dimensions.get('window').height - this.props.contentHeight > 0 && Platform.OS === 'android') {
+            return null;
         }
 
+        let type = this.props.refreshType;
+        let jsx = [this.renderNormalContent()];
+
+        return (
+            <View style={Platform.OS === 'ios' ? styles.pullRefresh : {width:Dimensions.get('window').width, height: this.loadMoreHeight}}>
+
+                {jsx.map((item, index) => {
+                    return <View key={index}>{item}</View>
+                })}
+            </View>
+        );
     }
 
     renderNormalContent() {
@@ -409,6 +288,61 @@ export default class PullRefreshScrollView extends Component<Props, State> {
 
     }
 
+    renderIndicatorContentBottom() {
+        let jsx = [this.renderBottomContent()];
+
+        return (
+            <View style={styles.loadMore}>
+
+                {jsx.map((item, index) => {
+                    return <View key={index}>{item}</View>
+                })}
+            </View>
+        );
+    }
+
+    /**
+     * 数据加载完成
+     */
+    onLoadFinish() {
+        this.setState({loadTitle: this.props.endText});
+    }
+
+
+    /**
+     * 没有数据可加载
+     */
+    onNoDataToLoad() {
+        this.setState({loadTitle: this.props.noDataText});
+    }
+
+
+    /**
+     * @author 何晏波
+     * @QQ 1054539528
+     * @date 2018/9/29
+     * @function: 刷新结束
+     */
+    onRefreshEnd() {
+        let now = new Date().getTime();
+
+        this.setState({
+            prTitle: this.props.refreshText,
+            prLoading: false,
+            beginScroll: false,
+            prTimeDisplay: dateFormat(now, 'yyyy-MM-dd hh:mm')
+        });
+
+        // 存一下刷新时间
+        AsyncStorage.setItem(this.prStoryKey, now.toString());
+        if (Platform.OS === 'ios') {
+            this._scrollViewRef.scrollTo({x: 0, y: 0, animated: true});
+        } else if (Platform.OS === 'android') {
+            this._scrollViewRef.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
+        }
+    }
+
+
     renderBottomContent() {
         let jsx = [];
         let indicatorStyle = {
@@ -424,210 +358,76 @@ export default class PullRefreshScrollView extends Component<Props, State> {
         return (jsx);
     }
 
-    rendeTextContent() {
-
-        let prStateStyle = {
-            marginBottom: 20,
-            fontSize: 12,
-        };
-
-        return (<Text style={prStateStyle}>{this.state.prTitle}</Text>);
-    }
-
-    rendeImgContent() {
-        this.transform = [{
-            rotate: this.state.prArrowDeg.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['0deg', '-180deg']
-            })
-        }];
-        let jsxarr = [];
-        let arrowStyle = {
-            width: 14,
-            height: 23,
-            marginBottom: 20,
-            transform: this.transform
-        };
-        let indicatorStyle = {
-            width: 16,
-            height: 16,
-            marginBottom: 20,
-        };
-
-        if (this.props.indicatorImg.url) {
-            if (this.props.indicatorImg.style) {
-                indicatorStyle = this.props.indicatorImg.style;
-            }
-            if (this.state.prLoading) {
-                jsxarr.push(<Image style={indicatorStyle} source={{uri: this.props.indicatorImg.url}}/>);
-            } else {
-                jsxarr.push(null);
-            }
-        } else if (this.state.prLoading) {
-            //@ts-ignore
-            jsxarr.push(<ActivityIndicatorIOS style={indicatorStyle} animated={true}/>);
-        } else {
-            jsxarr.push(null);
+    private _onScroll(event?: NativeSyntheticEvent<NativeScrollEvent>): void {
+        if (event) {
+            this.props.onScroll(event.nativeEvent.contentOffset.x, event.nativeEvent.contentOffset.y, event);
         }
-
-        if (this.props.indicatorArrowImg.url) {
-            if (this.props.indicatorArrowImg.style) {
-                arrowStyle = this.props.arrowStyle.style;
-            }
-            arrowStyle.transform = this.transform;
-            if (!this.state.prLoading) {
-                jsxarr.push(<Animated.Image style={arrowStyle} resizeMode={'contain'}
-                                            source={{uri: this.props.indicatorArrowImg.url}}/>);
-            } else {
-                jsxarr.push(null);
-            }
-        } else if (!this.state.prLoading) {
-            jsxarr.push(<Animated.Image style={arrowStyle} resizeMode={'contain'}
-                                        source={{uri: this.base64Icon}}/>);
-        } else {
-            jsxarr.push(null);
-        }
-
-        return jsxarr;
-    }
-
-    renderIndicatorContent() {
-        if (Dimensions.get('window').height - this.props.contentHeight > 0 && Platform.OS === 'android') {
-            return null;
-        }
-
-        let type = this.props.refreshType;
-        let jsx = null;
-
-        if (type === RefreshType.NORMAL) {
-            jsx = [this.renderNormalContent()];
-        }
-        if (type === RefreshType.TEXT) {
-            jsx = [this.rendeTextContent()];
-        }
-
-        //暂不支持图片刷新
-        if (type === RefreshType.IMAGE) {
-            return;
-        }
+        let target = event.nativeEvent;
+        let y = target.contentOffset.y;
 
 
-        return (
-            <View style={Platform.OS === 'ios' ? styles.pullRefresh : {width:Dimensions.get('window').width, height: this.loadMoreHeight}}>
+        if (this.dragFlag) {
+            if (Platform.OS === 'ios') {
+                if (y <= -70) {
+                    this.upState();
 
-                {jsx.map((item, index) => {
-                    return <View key={index}>{item}</View>
-                })}
-            </View>
-        );
-    }
-
-    renderIndicatorContentBottom() {
-        if (!this.props.useLoadMore) {
-            return null;
-        }
-        if (Dimensions.get('window').height - this.props.contentHeight > 0) {
-            return null;
-        }
-        let jsx = [this.renderBottomContent()];
-
-        return (
-            <View style={styles.loadMore}>
-
-                {jsx.map((item, index) => {
-                    return <View key={index}>{item}</View>
-                })}
-            </View>
-        );
-    }
-
-    getScrollResponder() {
-        return this.scrollView.getScrollResponder();
-    }
-
-    setNativeProps(props) {
-        this.scrollView.setNativeProps(props);
-    }
-
-    fixSticky() {
-        let stickyHeaderIndices = [];
-        let propsStickHeader = this.props.stickyHeaderIndices || [];
-
-        for (let i = 0; i < propsStickHeader.length; i++) {
-            if (i > 0) {
-                stickyHeaderIndices.push(propsStickHeader[i] + 1);
-            }
-
-        }
-        return stickyHeaderIndices;
-    }
-
-
-    render() {
-
-        return (<ScrollView
-            ref={(scrollView) => {
-                this.scrollView = scrollView
-            }}
-            {...this.props}
-            bounces={true}
-            onMomentumScrollEnd={(e) => {
-                if (Platform.OS === 'android') {
-                    let target = e.nativeEvent;
-                    let y = target.contentOffset.y;
-
-                    if (y >= 0 && y <= this.loadMoreHeight) {
-                        this.setState({
-                            prTitle: this.refreshingText,
-                            prLoading: true,
-                            prArrowDeg: new Animated.Value(0),
-
-                        });
-
-                        // 触发外部的下拉刷新方法
-                        if (this.props.onRefresh) {
-                            this.props.onRefresh(this);
-                        }
-                    }
+                } else {
+                    this.downState();
                 }
+            } else if (Platform.OS === 'android') {
+                if (y <= 10) {
+                    this.upState();
 
-            }}
-            stickyHeaderIndices={this.props.stickyHeaderIndices ? [this.props.stickyHeaderIndices] : null}
-            scrollEventThrottle={16}
-            onScrollEndDrag={(e) => this.onScrollEndDrag(e)}
-            onScrollBeginDrag={() => this.onScrollBeginDrag()}
-            onScroll={(e) => this.onScroll(e)}
-            onLayout={(!this._isSizeChangedCalledOnce || this.props.canChangeSize) ? this._onLayout : this._dummyOnLayout}
-        >
-            <View style={{flexDirection: this.props.isHorizontal ? "row" : "column"}}>
-                {this.renderIndicatorContent()}
-                <View style={{
-                    height: this.props.contentHeight,
-                    width: this.props.contentWidth,
-                }}>
-                    {this.props.children}
-                </View>
-                {this.useLoadMore ? this.renderIndicatorContentBottom() : null}
-            </View>
-        </ScrollView>);
+                } else {
+                    this.downState();
+                }
+            }
+        }
 
+        // if (this.props.onScroll) {
+        //     this.props.onScroll(event);
+        // }
     }
 
-    private _dummyOnLayout: (event: LayoutChangeEvent) => void = TSCast.cast(null);
+    // 高于临界值状态
+    upState() {
+        this.setState({
+            prTitle: this.props.refreshedText,
+            prState: 1
+        });
+
+        Animated.timing(this.state.prArrowDeg, {
+            toValue: 1,
+            duration: 100,
+            easing: Easing.inOut(Easing.quad)
+        }).start();
+    }
+
+    // 低于临界值状态
+    downState() {
+        this.setState({
+            prTitle: this.props.refreshText,
+            prState: 0
+        });
+        Animated.timing(this.state.prArrowDeg, {
+            toValue: 0,
+            duration: 100,
+            easing: Easing.inOut(Easing.quad)
+        }).start();
+    }
 
     private _onLayout(event: LayoutChangeEvent): void {
+        console.log('_onLayout');
         if (this._height !== event.nativeEvent.layout.height || this._width !== event.nativeEvent.layout.width) {
             this._height = event.nativeEvent.layout.height;
             this._width = event.nativeEvent.layout.width;
-            if (this.props && this.props.onSizeChanged) {
+            if (this.props.onSizeChanged) {
                 this._isSizeChangedCalledOnce = true;
                 this.props.onSizeChanged(event.nativeEvent.layout);
             }
         }
     }
-
 }
-
 
 const dateFormat = function (dateTime, fmt) {
     let date = new Date(dateTime);
@@ -653,6 +453,7 @@ const dateFormat = function (dateTime, fmt) {
     }
     return tmp;
 }
+
 const styles = StyleSheet.create({
     pullRefresh: {
         position: 'absolute',
@@ -696,5 +497,3 @@ const styles = StyleSheet.create({
     },
 
 });
-
-Object.assign(PullRefreshScrollView.prototype, ScrollableMixin);

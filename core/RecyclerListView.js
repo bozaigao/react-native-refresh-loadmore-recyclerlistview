@@ -14,8 +14,8 @@ import { BaseItemAnimator } from "./ItemAnimator";
 import ViewRenderer from "../platform/reactnative/viewrenderer/ViewRenderer";
 import { DefaultJSItemAnimator as DefaultItemAnimator } from "../platform/reactnative/itemanimators/defaultjsanimator/DefaultJSItemAnimator";
 import { Platform } from "react-native";
-import PullRefreshScrollView, { RefreshType } from "../platform/reactnative/scrollcomponent/PullRefreshScrollView";
-import ScrollComponent from "../platform/reactnative/scrollcomponent/ScrollComponent";
+import PullRefreshScrollView from "../platform/reactnative/scrollcomponent/PullRefreshScrollView";
+import { View, Text, StyleSheet } from "react-native";
 const IS_WEB = Platform.OS === "web", refreshRequestDebouncer = debounce((executable) => {
     executable();
 });
@@ -55,7 +55,7 @@ export default class RecyclerListView extends React.Component {
                 style: [],
                 url: ''
             },
-            refreshType: RefreshType.NORMAL,
+            refreshType: 'normal',
             onRefresh: props.onRefresh,
             useLoadMore: props.useLoadMore,
             stickyHeaderIndices: null,
@@ -181,20 +181,33 @@ export default class RecyclerListView extends React.Component {
         return viewabilityTracker ? viewabilityTracker.findFirstLogicallyVisibleIndex() : 0;
     }
     render() {
-        if (this.props.onRefresh) {
-            return (<PullRefreshScrollView ref={(scrollComponent) => {
-                this._scrollComponent = scrollComponent;
-                return this._scrollComponent;
-            }} {...this.props} {...this.props.scrollViewProps} {...this.defaultProps} onScroll={this._onScroll} onSizeChanged={this._onSizeChanged} contentHeight={this._initComplete ? this._virtualRenderer.getLayoutDimension().height : 0} contentWidth={this._initComplete ? this._virtualRenderer.getLayoutDimension().width : 0}>
-                    {this._generateRenderStack()}
-                </PullRefreshScrollView>);
-        }
-        return (<ScrollComponent ref={(scrollComponent) => {
+        return (<PullRefreshScrollView ref={(scrollComponent) => {
             this._scrollComponent = scrollComponent;
             return this._scrollComponent;
         }} {...this.props} {...this.props.scrollViewProps} {...this.defaultProps} onScroll={this._onScroll} onSizeChanged={this._onSizeChanged} contentHeight={this._initComplete ? this._virtualRenderer.getLayoutDimension().height : 0} contentWidth={this._initComplete ? this._virtualRenderer.getLayoutDimension().width : 0}>
                 {this._generateRenderStack()}
-            </ScrollComponent>);
+            </PullRefreshScrollView>);
+    }
+    renderBottomContent() {
+        let jsx = [];
+        let indicatorStyle = {
+            position: 'absolute',
+            left: -40,
+            top: -1,
+            width: 16,
+            height: 16
+        };
+        jsx.push(<Text key={2} style={{ color: '#979aa0' }}>{'加载跟多'}</Text>);
+        return (jsx);
+    }
+    renderIndicatorContentBottom() {
+        let jsx = [this.renderBottomContent()];
+        return (<View style={styles.loadMore}>
+
+                {jsx.map((item, index) => {
+            return <View key={index}>{item}</View>;
+        })}
+            </View>);
     }
     onLoadFinish() {
         this._scrollComponent.onLoadFinish();
@@ -404,4 +417,45 @@ RecyclerListView.propTypes = {
     itemAnimator: PropTypes.instanceOf(BaseItemAnimator),
     scrollViewProps: PropTypes.object,
 };
+const styles = StyleSheet.create({
+    pullRefresh: {
+        position: 'absolute',
+        top: -69,
+        left: 0,
+        backfaceVisibility: 'hidden',
+        right: 0,
+        height: 70,
+        backgroundColor: '#fafafa',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+    loadMore: {
+        height: 35,
+        backgroundColor: '#fafafa',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    text: {
+        height: 70,
+        backgroundColor: '#fafafa',
+        color: '#979aa0'
+    },
+    prText: {
+        marginBottom: 4,
+        color: '#979aa0',
+        fontSize: 12,
+    },
+    prState: {
+        marginBottom: 4,
+        fontSize: 12,
+        color: '#979aa0',
+    },
+    lmState: {
+        fontSize: 12,
+    },
+    indicatorContent: {
+        flexDirection: 'row',
+        marginBottom: 5
+    },
+});
 //# sourceMappingURL=RecyclerListView.js.map

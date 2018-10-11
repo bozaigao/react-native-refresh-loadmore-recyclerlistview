@@ -3,8 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="00ef5536-35e9-4cf3-bf6a-bedbcc14484b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/RecyclerListView.js" beforeDir="false" afterPath="$PROJECT_DIR$/core/RecyclerListView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/RecyclerListView.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/core/RecyclerListView.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/RecyclerListView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/core/RecyclerListView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/scrollcomponent/BaseScrollComponent.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/core/scrollcomponent/BaseScrollComponent.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/scrollcomponent/BaseScrollComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/core/scrollcomponent/BaseScrollComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/ScrollComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/ScrollComponent.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/reactnative/scrollcomponent/ScrollComponent.tsx" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,20 +49,31 @@
       <file leaf-file-name="PullRefreshScrollView.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="683" lean-forward="true" selection-start-line="683" selection-end-line="683" />
+            <state relative-caret-position="198">
+              <caret line="33" column="58" selection-start-line="33" selection-start-column="58" selection-end-line="33" selection-end-column="58" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PullRefreshScrollView.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BaseScrollComponent.tsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/scrollcomponent/BaseScrollComponent.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="34" column="19" lean-forward="true" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScrollableMixin.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/ScrollableMixin.ts">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="PullRefreshScrollView.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="375" column="5" lean-forward="true" selection-start-line="375" selection-start-column="5" selection-end-line="375" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="176">
+              <caret line="355" column="6" lean-forward="true" selection-start-line="355" selection-start-column="6" selection-end-line="355" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -135,14 +156,6 @@
               <item name="reactnative" type="462c0819:PsiDirectoryNode" />
               <item name="scrollcomponent" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="react-native-refresh-loadmore-recyclerlistview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-native-refresh-loadmore-recyclerlistview" type="462c0819:PsiDirectoryNode" />
-              <item name="platform" type="462c0819:PsiDirectoryNode" />
-              <item name="reactnative" type="462c0819:PsiDirectoryNode" />
-              <item name="scrollcomponent" type="462c0819:PsiDirectoryNode" />
-              <item name="PullRefreshScrollView.tsx" type="620a8d5e:NestingTreeNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -187,19 +200,19 @@
       <workItem from="1538958178307" duration="947000" />
       <workItem from="1538970023824" duration="1908000" />
       <workItem from="1539082624122" duration="492000" />
-      <workItem from="1539238630136" duration="199000" />
+      <workItem from="1539238630136" duration="792000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3793000" />
+    <option name="totallyTimeSpent" value="4386000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1680" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TypeScript" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21274355" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21274355" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -207,7 +220,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.2875622" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.2875622" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -304,20 +317,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx">
+    <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="683" lean-forward="true" selection-start-line="683" selection-end-line="683" />
+        <state relative-caret-position="176">
+          <caret line="355" column="6" lean-forward="true" selection-start-line="355" selection-start-column="6" selection-end-line="355" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.js">
+    <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/ScrollableMixin.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform/reactnative/scrollcomponent/PullRefreshScrollView.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="375" column="5" lean-forward="true" selection-start-line="375" selection-start-column="5" selection-end-line="375" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="198">
+          <caret line="33" column="58" selection-start-line="33" selection-start-column="58" selection-end-line="33" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/scrollcomponent/BaseScrollComponent.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="34" column="19" lean-forward="true" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
         </state>
       </provider>
     </entry>
