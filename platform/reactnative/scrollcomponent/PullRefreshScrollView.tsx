@@ -5,7 +5,7 @@
  * @date 2018/10/11
  * @Description: 截至目前为止我所见过的和使用过的最流畅的rn同时完美适配Android和iOS的下拉刷新上拉加载组件
  * 结合recyclerlistview的高性能内存回收利用机制简直是绝配
-*/
+ */
 import * as React from "react";
 import {
     LayoutChangeEvent,
@@ -384,9 +384,9 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
             }
         }
 
-        // if (this.props.onScroll) {
-        //     this.props.onScroll(event);
-        // }
+        if (event) {
+            this.props.onScroll(event.nativeEvent.contentOffset.x, event.nativeEvent.contentOffset.y, event);
+        }
     }
 
     // 高于临界值状态

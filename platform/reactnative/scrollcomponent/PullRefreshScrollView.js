@@ -261,6 +261,9 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                 }
             }
         }
+        if (event) {
+            this.props.onScroll(event.nativeEvent.contentOffset.x, event.nativeEvent.contentOffset.y, event);
+        }
     }
     upState() {
         this.setState({
