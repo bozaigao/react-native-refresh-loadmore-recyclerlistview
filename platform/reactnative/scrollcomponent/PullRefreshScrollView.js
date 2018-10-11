@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ScrollView, View, Platform, ActivityIndicator, AsyncStorage } from "react-native";
+import { View, Platform, ActivityIndicator, AsyncStorage } from "react-native";
 import BaseScrollComponent from "../../../core/scrollcomponent/BaseScrollComponent";
 import TSCast from "../../../utils/TSCast";
 import { Dimensions, Text, StyleSheet } from "react-native";
@@ -304,13 +304,6 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         }
     }
 }
-PullRefreshScrollView.defaultProps = {
-    contentHeight: 0,
-    contentWidth: 0,
-    externalScrollView: TSCast.cast(ScrollView),
-    isHorizontal: false,
-    scrollThrottle: 16,
-};
 PullRefreshScrollView.propTypes = {};
 const dateFormat = function (dateTime, fmt) {
     let date = new Date(dateTime);

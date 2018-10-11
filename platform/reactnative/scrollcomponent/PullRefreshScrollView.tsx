@@ -32,13 +32,6 @@ import {Easing} from "react-native";
  */
 
 export default class PullRefreshScrollView extends BaseScrollComponent {
-    public static defaultProps = {
-        contentHeight: 0,
-        contentWidth: 0,
-        externalScrollView: TSCast.cast(ScrollView), //TSI
-        isHorizontal: false,
-        scrollThrottle: 16,
-    };
 
     private _height: number;
     private _width: number;
