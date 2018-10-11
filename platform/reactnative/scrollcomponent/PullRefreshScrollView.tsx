@@ -19,7 +19,7 @@ import {
 } from "react-native";
 import BaseScrollComponent, {ScrollComponentProps} from "../../../core/scrollcomponent/BaseScrollComponent";
 import TSCast from "../../../utils/TSCast";
-import {Dimensions,Text,StyleSheet} from "react-native";
+import {Dimensions, Text, StyleSheet} from "react-native";
 import RecyclerListView from "react-native-refresh-loadmore-recyclerlistview/core/RecyclerListView";
 import * as PropTypes from "prop-types";
 import {Animated} from "react-native";
@@ -59,8 +59,8 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         this.state = {
             prTitle: args.refreshText,
             loadTitle: args.endingText,
-            prLoading:false,
-            prArrowDeg:new Animated.Value(0),
+            prLoading: false,
+            prArrowDeg: new Animated.Value(0),
             prTimeDisplay: '暂无更新',
             beginScroll: null,
             prState: 0,
@@ -141,7 +141,9 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                       onScroll={this._onScroll}
                       onLayout={(!this._isSizeChangedCalledOnce || this.props.canChangeSize) ? this._onLayout : this._dummyOnLayout}>
                 <View style={{flexDirection: this.props.isHorizontal ? "row" : "column"}}>
-                    {this.renderIndicatorContent()}
+                    {this.props.onRefresh ?
+                        this.renderIndicatorContent() :
+                        null}
                     <View style={{
                         height: this.props.contentHeight,
                         width: this.props.contentWidth,
@@ -204,7 +206,10 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         let jsx = [this.renderNormalContent()];
 
         return (
-            <View style={Platform.OS === 'ios' ? styles.pullRefresh : {width:Dimensions.get('window').width, height: this.loadMoreHeight}}>
+            <View style={Platform.OS === 'ios' ? styles.pullRefresh : {
+                width: Dimensions.get('window').width,
+                height: this.loadMoreHeight
+            }}>
 
                 {jsx.map((item, index) => {
                     return <View key={index}>{item}</View>
@@ -353,7 +358,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
             height: 16
         };
 
-        jsx.push(<Text key={2} style={{color:'#979aa0'}}>{this.state.loadTitle}</Text>);
+        jsx.push(<Text key={2} style={{color: '#979aa0'}}>{this.state.loadTitle}</Text>);
 
         return (jsx);
     }
