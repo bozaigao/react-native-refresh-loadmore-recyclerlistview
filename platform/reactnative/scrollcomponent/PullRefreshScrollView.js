@@ -34,22 +34,6 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
             this._scrollViewRef.scrollTo({ x, y, animated: isAnimated });
         }
     }
-    componentWillReceiveProps() {
-        if (this.flag !== this.props.flag) {
-            if (Platform.OS === 'android') {
-                this.setState({
-                    prTitle: this.props.refreshingText,
-                    prLoading: true,
-                    prArrowDeg: new Animated.Value(0),
-                });
-                this.timer = setTimeout(() => {
-                    this._scrollViewRef.scrollTo({ x: 0, y: this.loadMoreHeight, animated: true });
-                    this.timer && clearTimeout(this.timer);
-                }, 1000);
-            }
-            this.flag = this.props.flag;
-        }
-    }
     render() {
         const Scroller = TSCast.cast(this.props.externalScrollView);
         return (<Scroller ref={(scrollView) => {
