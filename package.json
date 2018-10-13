@@ -14,9 +14,9 @@
     "raw": "react-native-refresh-loadmore-recyclerlistview@1.4.10",
     "name": "react-native-refresh-loadmore-recyclerlistview",
     "escapedName": "react-native-refresh-loadmore-recyclerlistview",
-    "rawSpec": "1.4.10",
+    "rawSpec": "1.4.12",
     "saveSpec": null,
-    "fetchSpec": "1.4.10"
+    "fetchSpec": "1.4.12"
   },
   "_requiredBy": [
     "#USER",
