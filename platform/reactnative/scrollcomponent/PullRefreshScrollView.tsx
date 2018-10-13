@@ -43,7 +43,6 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
     private loadMoreHeight: number;
     private dragFlag;
     private prStoryKey;
-    private flag;
     private timer: any;
 
     constructor(args: ScrollComponentProps) {
@@ -73,25 +72,6 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         if (this._scrollViewRef) {
             this._scrollViewRef.scrollTo({x, y, animated: isAnimated});
         }
-    }
-
-    componentWillReceiveProps() {
-        if (this.flag !== this.props.flag) {
-            if (Platform.OS === 'android') {
-                this.setState({
-                    prTitle: this.props.refreshingText,
-                    prLoading: true,
-                    prArrowDeg: new Animated.Value(0),
-
-                });
-                this.timer = setTimeout(() => {
-                    this._scrollViewRef.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
-                    this.timer && clearTimeout(this.timer);
-                }, 1000);
-            }
-            this.flag = this.props.flag;
-        }
-
     }
 
     public render(): JSX.Element {
