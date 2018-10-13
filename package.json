@@ -1,29 +1,30 @@
 {
-  "_from": "react-native-refresh-loadmore-recyclerlistview@^1.4.9",
-  "_id": "react-native-refresh-loadmore-recyclerlistview@1.4.9",
+  "_from": "react-native-refresh-loadmore-recyclerlistview@1.4.10",
+  "_id": "react-native-refresh-loadmore-recyclerlistview@1.4.10",
   "_inBundle": false,
-  "_integrity": "sha512-i3Pl61XkN7FyWZEdYsgOb4kyu5FPF1Fuep7jIjAI/oe4CXdl1e+LFgzeZy8YFYtMlAD0D1AFjRNs0IrWqcqU4Q==",
+  "_integrity": "sha512-6ESoMhjob2TbLTHtuu+YZPSwncr2kgdX2MVtljS7H/u/9TjwALVcodj2nY6S6zoQkK6cRPkaje6KDSUvr6D/AA==",
   "_location": "/react-native-refresh-loadmore-recyclerlistview",
   "_phantomChildren": {
     "csstype": "2.5.7",
     "fbjs": "0.8.17"
   },
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "react-native-refresh-loadmore-recyclerlistview@^1.4.9",
+    "raw": "react-native-refresh-loadmore-recyclerlistview@1.4.10",
     "name": "react-native-refresh-loadmore-recyclerlistview",
     "escapedName": "react-native-refresh-loadmore-recyclerlistview",
-    "rawSpec": "^1.4.9",
+    "rawSpec": "1.4.10",
     "saveSpec": null,
-    "fetchSpec": "^1.4.9"
+    "fetchSpec": "1.4.10"
   },
   "_requiredBy": [
+    "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/react-native-refresh-loadmore-recyclerlistview/-/react-native-refresh-loadmore-recyclerlistview-1.4.9.tgz",
-  "_shasum": "d2fc6f11343ff9418603c997eadbef335d15ca48",
-  "_spec": "react-native-refresh-loadmore-recyclerlistview@^1.4.9",
+  "_resolved": "https://registry.npmjs.org/react-native-refresh-loadmore-recyclerlistview/-/react-native-refresh-loadmore-recyclerlistview-1.4.10.tgz",
+  "_shasum": "9af78247aa6743302a004cd4812dc0f0d60b8f53",
+  "_spec": "react-native-refresh-loadmore-recyclerlistview@1.4.10",
   "_where": "/Users/heyanbei/Desktop/ZhiZhuo/ZhiZhuo",
   "author": {
     "name": "bozaigao"
@@ -82,5 +83,5 @@
     "setup": "sh scripts/setup.sh"
   },
   "types": "dist/reactnative/index.d.ts",
-  "version": "1.4.12"
+  "version": "1.4.10"
 }
