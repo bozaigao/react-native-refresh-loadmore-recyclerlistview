@@ -142,7 +142,12 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                     }}>
                         {this.props.children}
                     </View>
-                    {this.props.onEndReached ? this.renderIndicatorContentBottom() : null}
+                    {
+                        this.props.renderFooter
+                    }
+                    {
+                        this.props.onEndReached ? this.renderIndicatorContentBottom() : null
+                    }
                 </View>
             </Scroller>
         );
