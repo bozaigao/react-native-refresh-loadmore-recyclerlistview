@@ -336,13 +336,11 @@ const styles = StyleSheet.create({
         backfaceVisibility: 'hidden',
         right: 0,
         height: 70,
-        backgroundColor: '#fafafa',
         alignItems: 'center',
         justifyContent: 'flex-end'
     },
     loadMore: {
         height: 35,
-        backgroundColor: '#fafafa',
         alignItems: 'center',
         justifyContent: 'center'
     },

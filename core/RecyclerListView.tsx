@@ -160,8 +160,8 @@ export default class RecyclerListView extends React.Component<RecyclerListViewPr
             refreshedText: '释放立即刷新',
             refreshingText: '正在刷新数据中..',
             refreshText: '下拉可以刷新',
-            endText: '已经完成加载',
-            noDataText: '没有数据啦T_T',
+            endText: '',
+            noDataText: '',
             endingText: '数据加载中……',
             indicatorArrowImg: {
                 style: [],
