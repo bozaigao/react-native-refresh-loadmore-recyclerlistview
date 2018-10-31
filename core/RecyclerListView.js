@@ -48,7 +48,7 @@ export default class RecyclerListView extends React.Component {
             refreshText: '下拉可以刷新',
             endText: '',
             noDataText: '',
-            endingText: '数据加载中……',
+            endingText: '',
             indicatorArrowImg: {
                 style: [],
                 url: ''
