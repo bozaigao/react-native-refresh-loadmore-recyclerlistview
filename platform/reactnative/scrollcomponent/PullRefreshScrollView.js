@@ -43,7 +43,8 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                     prArrowDeg: new Animated.Value(0),
                 });
                 this.timer = setTimeout(() => {
-                    this._scrollViewRef.scrollTo({ x: 0, y: this.loadMoreHeight, animated: true });
+                    this._scrollViewRef &&
+                        this._scrollViewRef.scrollTo({ x: 0, y: this.loadMoreHeight, animated: true });
                     this.timer && clearTimeout(this.timer);
                 }, 1000);
             }
