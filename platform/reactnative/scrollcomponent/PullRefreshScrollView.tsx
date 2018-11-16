@@ -85,7 +85,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
 
                 });
                 this.timer = setTimeout(() => {
-                    this._scrollViewRef&&
+                    this._scrollViewRef &&
                     this._scrollViewRef.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
                     this.timer && clearTimeout(this.timer);
                 }, 1000);
@@ -138,10 +138,11 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                         this.renderIndicatorContent() :
                         null}
                     <View style={{
-                        height: this.props.contentHeight,
+                        height: Platform.OS === 'ios' ? this.props.contentHeight : (Dimensions.get('window').height - this.props.contentHeight < 0 ? this.props.contentHeight : Dimensions.get('window').height),
                         width: this.props.contentWidth,
                     }}>
                         {this.props.children}
+
                     </View>
                     {
                         this.props.renderFooter
@@ -196,10 +197,6 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
     }
 
     renderIndicatorContent() {
-        if (Dimensions.get('window').height - this.props.contentHeight > 0 && Platform.OS === 'android') {
-            return null;
-        }
-
         let type = this.props.refreshType;
         let jsx = [this.renderNormalContent()];
 
