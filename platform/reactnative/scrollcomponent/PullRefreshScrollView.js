@@ -35,7 +35,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         }
     }
     componentWillReceiveProps() {
-        if (this.flag !== this.props.flag) {
+        if (this.flag && this.flag !== this.props.flag) {
             if (Platform.OS === 'android') {
                 this.setState({
                     prTitle: this.props.refreshingText,
