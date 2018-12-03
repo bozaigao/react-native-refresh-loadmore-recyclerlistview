@@ -42,7 +42,7 @@ export default class RecyclerListView extends React.Component {
         this.onRefreshEnd = () => {
             this._scrollComponent.onRefreshEnd();
         };
-        this.defaultProps = {
+        this.default_props = {
             refreshedText: '释放立即刷新',
             refreshingText: '正在刷新数据中..',
             refreshText: '下拉可以刷新',
@@ -188,7 +188,7 @@ export default class RecyclerListView extends React.Component {
         return (<PullRefreshScrollView ref={(scrollComponent) => {
             this._scrollComponent = scrollComponent;
             return this._scrollComponent;
-        }} {...this.props} {...this.props.scrollViewProps} {...this.defaultProps} onScroll={this._onScroll} onSizeChanged={this._onSizeChanged} contentHeight={this._initComplete ? this._virtualRenderer.getLayoutDimension().height : 0} contentWidth={this._initComplete ? this._virtualRenderer.getLayoutDimension().width : 0}>
+        }} {...this.props} {...this.props.scrollViewProps} {...this.default_props} onScroll={this._onScroll} onSizeChanged={this._onSizeChanged} contentHeight={this._initComplete ? this._virtualRenderer.getLayoutDimension().height : 0} contentWidth={this._initComplete ? this._virtualRenderer.getLayoutDimension().width : 0}>
                 {this._generateRenderStack()}
             </PullRefreshScrollView>);
     }

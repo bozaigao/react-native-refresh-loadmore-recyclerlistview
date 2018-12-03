@@ -152,11 +152,11 @@ export default class RecyclerListView extends React.Component<RecyclerListViewPr
     private _scrollComponent: any;
 
     private _defaultItemAnimator: ItemAnimator = new DefaultItemAnimator();
-    private defaultProps;
+    private default_props;
 
     constructor(props: RecyclerListViewProps) {
         super(props);
-        this.defaultProps = {
+        this.default_props = {
             refreshedText: '释放立即刷新',
             refreshingText: '正在刷新数据中..',
             refreshText: '下拉可以刷新',
@@ -333,7 +333,7 @@ export default class RecyclerListView extends React.Component<RecyclerListViewPr
                 }}
                 {...this.props}
                 {...this.props.scrollViewProps}
-                {...this.defaultProps}
+                {...this.default_props}
                 onScroll={this._onScroll}
                 onSizeChanged={this._onSizeChanged}
                 contentHeight={this._initComplete ? this._virtualRenderer.getLayoutDimension().height : 0}
