@@ -82,5 +82,5 @@
     "setup": "sh scripts/setup.sh"
   },
   "types": "dist/reactnative/index.d.ts",
-  "version": "1.4.21"
+  "version": "1.4.22"
 }
