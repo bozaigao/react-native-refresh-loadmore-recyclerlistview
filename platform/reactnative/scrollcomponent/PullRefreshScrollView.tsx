@@ -67,6 +67,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         this._width = 0;
         this.prStoryKey = 'prtimekey';
         this._isSizeChangedCalledOnce = false;
+        this.flag = args.flag;
     }
 
     public scrollTo(x: number, y: number, isAnimated: boolean): void {
