@@ -36,20 +36,19 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         }
     }
     componentWillReceiveProps() {
-        if (this.flag !== this.props.flag) {
-            if (Platform.OS === 'android') {
-                this.setState({
-                    prTitle: this.props.refreshingText,
-                    prLoading: true,
-                    prArrowDeg: new Animated.Value(0),
-                });
-                this.timer = setTimeout(() => {
-                    this._scrollViewRef &&
-                        this._scrollViewRef.scrollTo({ x: 0, y: this.loadMoreHeight, animated: true });
-                    this.timer && clearTimeout(this.timer);
-                }, 1000);
-            }
-            this.flag = this.props.flag;
+    }
+    componentDidMount() {
+        if (Platform.OS === 'android') {
+            this.setState({
+                prTitle: this.props.refreshingText,
+                prLoading: true,
+                prArrowDeg: new Animated.Value(0),
+            });
+            this.timer = setTimeout(() => {
+                this._scrollViewRef &&
+                    this._scrollViewRef.scrollTo({ x: 0, y: this.loadMoreHeight, animated: true });
+                this.timer && clearTimeout(this.timer);
+            }, 1000);
         }
     }
     render() {
@@ -61,15 +60,12 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
             if (Platform.OS === 'android') {
                 let target = e.nativeEvent;
                 let y = target.contentOffset.y;
-                if (y >= 0 && y <= this.loadMoreHeight) {
+                if (y <= this.loadMoreHeight) {
                     this.setState({
                         prTitle: this.props.refreshingText,
                         prLoading: true,
                         prArrowDeg: new Animated.Value(0),
                     });
-                    if (this.props.onRefresh) {
-                        this.props.onRefresh(this);
-                    }
                 }
             }
         }} bounces={this.props.onRefresh ? true : false} onScrollEndDrag={(e) => this.onScrollEndDrag(e)} onScrollBeginDrag={() => this.onScrollBeginDrag()} removeClippedSubviews={false} scrollEventThrottle={16} {...this.props} horizontal={this.props.isHorizontal} onScroll={this._onScroll} onLayout={(!this._isSizeChangedCalledOnce || this.props.canChangeSize) ? this._onLayout : this._dummyOnLayout}>
@@ -265,6 +261,17 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                 else {
                     this.downState();
                 }
+            }
+        }
+        else {
+            if (y === 0 &&
+                Platform.OS === 'android') {
+                this.setState({
+                    prTitle: this.props.refreshingText,
+                    prLoading: true,
+                    prArrowDeg: new Animated.Value(0),
+                });
+                this.onRefreshEnd();
             }
         }
         if (event) {

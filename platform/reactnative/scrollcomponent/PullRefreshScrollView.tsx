@@ -77,23 +77,40 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
     }
 
     componentWillReceiveProps() {
-        if (this.flag !== this.props.flag) {
-            if (Platform.OS === 'android') {
-                this.setState({
-                    prTitle: this.props.refreshingText,
-                    prLoading: true,
-                    prArrowDeg: new Animated.Value(0),
+        // if (this.flag !== this.props.flag) {
+        //     if (Platform.OS === 'android') {
+        //         this.setState({
+        //             prTitle: this.props.refreshingText,
+        //             prLoading: true,
+        //             prArrowDeg: new Animated.Value(0),
+        //
+        //         });
+        //         this.timer = setTimeout(() => {
+        //             this._scrollViewRef &&
+        //             this._scrollViewRef.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
+        //             this.timer && clearTimeout(this.timer);
+        //         }, 1000);
+        //     }
+        //     this.flag = this.props.flag;
+        // }
 
-                });
-                this.timer = setTimeout(() => {
-                    this._scrollViewRef &&
-                    this._scrollViewRef.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
-                    this.timer && clearTimeout(this.timer);
-                }, 1000);
-            }
-            this.flag = this.props.flag;
+    }
+
+
+    componentDidMount() {
+        if (Platform.OS === 'android') {
+            this.setState({
+                prTitle: this.props.refreshingText,
+                prLoading: true,
+                prArrowDeg: new Animated.Value(0),
+
+            });
+            this.timer = setTimeout(() => {
+                this._scrollViewRef &&
+                this._scrollViewRef.scrollTo({x: 0, y: this.loadMoreHeight, animated: true});
+                this.timer && clearTimeout(this.timer);
+            }, 1000);
         }
-
     }
 
     public render(): JSX.Element {
@@ -109,18 +126,13 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                               let target = e.nativeEvent;
                               let y = target.contentOffset.y;
 
-                              if (y >= 0 && y <= this.loadMoreHeight) {
+                              if (y <= this.loadMoreHeight) {
                                   this.setState({
                                       prTitle: this.props.refreshingText,
                                       prLoading: true,
                                       prArrowDeg: new Animated.Value(0),
 
                                   });
-
-                                  // 触发外部的下拉刷新方法
-                                  if (this.props.onRefresh) {
-                                      this.props.onRefresh(this);
-                                  }
                               }
                           }
 
@@ -366,7 +378,6 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
         let target = event.nativeEvent;
         let y = target.contentOffset.y;
 
-
         if (this.dragFlag) {
             if (Platform.OS === 'ios') {
                 if (y <= -70) {
@@ -382,6 +393,19 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                 } else {
                     this.downState();
                 }
+            }
+        }
+        //解决Android用户端迅速拉动列表手指放开的一瞬间列表还在滚动
+        else {
+            if (y === 0 &&
+                Platform.OS === 'android') {
+                this.setState({
+                    prTitle: this.props.refreshingText,
+                    prLoading: true,
+                    prArrowDeg: new Animated.Value(0),
+
+                });
+                this.onRefreshEnd();
             }
         }
 
