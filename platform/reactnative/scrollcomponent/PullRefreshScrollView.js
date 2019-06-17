@@ -108,6 +108,7 @@ export default class PullRefreshScrollView extends BaseScrollComponent {
                 prTitle: this.props.refreshingText,
                 prLoading: true,
                 prArrowDeg: new Animated.Value(0),
+                prState: 0
             });
             if (this.props.onRefresh) {
                 this.props.onRefresh(this);
